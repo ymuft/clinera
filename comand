@@ -1,18 +1,11 @@
-
 @echo off
 echo ===============================
-echo Pressione Enter para limpar o cache DNS...
-pause >nul
-
 echo Limpando cache DNS...
 ipconfig /flushdns
 echo DNS limpo com sucesso!
 echo.
 
 echo ===============================
-echo Pressione Enter para limpar arquivos temporarios...
-pause >nul
-
 echo Limpando arquivos temporarios do usuario...
 del /q /f /s %TEMP%\*
 echo Limpando arquivos temporarios do sistema...
@@ -21,10 +14,6 @@ echo Temporarios removidos!
 echo.
 
 echo ===============================
-echo Feche o Microsoft Edge antes de continuar!
-echo Pressione Enter para limpar cache e cookies do Edge...
-pause >nul
-
 echo Limpando cache e cookies do Microsoft Edge...
 
 REM Caminhos do cache e cookies
@@ -51,10 +40,6 @@ echo Cache e cookies do Edge limpos (se existiam).
 echo.
 
 echo ===============================
-echo Feche o Google Chrome antes de continuar!
-echo Pressione Enter para limpar cache e cookies do Chrome...
-pause >nul
-
 echo Limpando cache e cookies do Google Chrome...
 
 REM Caminhos do cache e cookies
@@ -94,30 +79,21 @@ if exist "%chromeCookies%" (
 echo Cache e cookies do Chrome limpos (se existiam).
 echo.
 
-
-
-
 cls
-
-@echo off
 setlocal
 
-
-set SERVIDOR= cloud.sap
-
+set SERVIDOR=cloud.sap
 echo Testando conectividade com %SERVIDOR%...
 
 ping -n 1 %SERVIDOR% >nul
 
 if %errorlevel%==0 (
-color 2
+    color 2
     echo Servidor online.
 ) else (
-color 4
+    color 4
     echo Servidor offline ou sem resposta.
 )
-
-pause
 
 echo ================================
 echo Todas as limpezas foram concluidas
@@ -125,6 +101,5 @@ echo ==================================
 color 2
 echo.
 echo Escrito por Gabriel Pocas sem fim lucrativos na intencao de agilizar processos 
-
 
 pause
