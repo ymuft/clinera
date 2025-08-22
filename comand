@@ -1,86 +1,56 @@
 @echo off
 echo ===============================
+echo Pressione Enter para limpar o cache DNS...
+pause >nul
+
 echo Limpando cache DNS...
 ipconfig /flushdns
 echo DNS limpo com sucesso!
 echo.
 
 echo ===============================
+echo Pressione Enter para limpar arquivos temporarios...
+pause >nul
+
 echo Limpando arquivos temporarios do usuario...
 del /q /f /s %TEMP%\*
 echo Limpando arquivos temporarios do sistema...
-del /q /f /s C:\Windows\Temp\*
-echo Temporarios removidos!
+@@ -21,10 +14,6 @@ echo Temporarios removidos!
 echo.
 
 echo ===============================
+echo Feche o Microsoft Edge antes de continuar!
+echo Pressione Enter para limpar cache e cookies do Edge...
+pause >nul
+
 echo Limpando cache e cookies do Microsoft Edge...
 
 REM Caminhos do cache e cookies
-set "edgeCache=%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache"
-set "edgeCookies=%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Cookies"
-
-REM Apagar cache
-if exist "%edgeCache%" (
-    echo Apagando cache...
-    rmdir /s /q "%edgeCache%"
-) else (
-    echo Cache nao encontrado ou ja removido.
-)
-
-REM Apagar cookies
-if exist "%edgeCookies%" (
-    echo Apagando cookies...
-    del /q "%edgeCookies%"
-) else (
-    echo Arquivo de cookies nao encontrado ou ja removido.
-)
-
-echo Cache e cookies do Edge limpos (se existiam).
+@@ -51,10 +40,6 @@ echo Cache e cookies do Edge limpos (se existiam).
 echo.
 
 echo ===============================
+echo Feche o Google Chrome antes de continuar!
+echo Pressione Enter para limpar cache e cookies do Chrome...
+pause >nul
+
 echo Limpando cache e cookies do Google Chrome...
 
 REM Caminhos do cache e cookies
-set "chromeCache=%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache"
-set "chromeCodeCache=%LOCALAPPDATA%\Google\Chrome\User Data\Default\Code Cache"
-set "chromeGPUCache=%LOCALAPPDATA%\Google\Chrome\User Data\Default\GPUCache"
-set "chromeCookies=%LOCALAPPDATA%\Google\Chrome\User Data\Default\Network\Cookies"
-
-REM Apagar cache
-if exist "%chromeCache%" (
-    echo Apagando cache...
-    rmdir /s /q "%chromeCache%"
-) else (
-    echo Cache nao encontrado ou ja removido.
-)
-
-REM Apagar code cache
-if exist "%chromeCodeCache%" (
-    echo Apagando code cache...
-    rmdir /s /q "%chromeCodeCache%"
-)
-
-REM Apagar GPU cache
-if exist "%chromeGPUCache%" (
-    echo Apagando GPU cache...
-    rmdir /s /q "%chromeGPUCache%"
-)
-
-REM Apagar cookies
-if exist "%chromeCookies%" (
-    echo Apagando cookies...
-    del /q "%chromeCookies%"
-) else (
-    echo Arquivo de cookies nao encontrado ou ja removido.
-)
-
+@@ -94,37 +79,27 @@ if exist "%chromeCookies%" (
 echo Cache e cookies do Chrome limpos (se existiam).
 echo.
 
+
+
+
 cls
+
+@echo off
 setlocal
+
+
+set SERVIDOR= cloud.sap
 
 set SERVIDOR=cloud.sap
 echo Testando conectividade com %SERVIDOR%...
@@ -88,12 +58,16 @@ echo Testando conectividade com %SERVIDOR%...
 ping -n 1 %SERVIDOR% >nul
 
 if %errorlevel%==0 (
+color 2
     color 2
     echo Servidor online.
 ) else (
+color 4
     color 4
     echo Servidor offline ou sem resposta.
 )
+
+pause
 
 echo ================================
 echo Todas as limpezas foram concluidas
