@@ -1,4 +1,5 @@
 @echo off
+echo Escrito por Gabriel Pocas sem fim lucrativos na intencao de agilizar processos 
 echo ===============================
 echo Pressione Enter para limpar o cache DNS...
 pause >nul
