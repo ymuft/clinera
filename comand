@@ -1,5 +1,8 @@
 @echo off
+color 2
 echo Escrito por Gabriel Pocas sem fim lucrativos na intencao de agilizar processos 
+color 7
+
 echo ===============================
 echo Pressione Enter para limpar o cache DNS...
 pause >nul
@@ -13,29 +16,95 @@ echo ===============================
 echo Pressione Enter para limpar arquivos temporarios...
 pause >nul
 
-echo ===============================
-echo Feche o Microsoft Edge antes de continuar!
-echo Pressione Enter para limpar cache e cookies do Edge...
-pause >nul
 
-echo Limpando cache e cookies do Microsoft Edge...
+@echo off
+setlocal enabledelayedexpansion
+title Limpeza Sistema
 
-REM Caminhos do cache e cookies
-@@ -51,10 +40,6 @@ echo Cache e cookies do Edge limpos (se existiam).
+echo ================================
+echo    INICIANDO LIMPEZA
+echo ================================
 echo.
 
-echo ===============================
-echo Feche o Google Chrome antes de continuar!
-echo Pressione Enter para limpar cache e cookies do Chrome...
-pause >nul
+:: -------------------------------
+:: Limpando arquivos temporarios do usuario
+:: -------------------------------
+echo [1/7] Limpando TEMP do usuario...
+del /f /s /q "%TEMP%\*" >nul 2>&1
+for /d %%d in ("%TEMP%\*") do rd /s /q "%%d" >nul 2>&1
+echo  TEMP do usuario limpo.
 
-echo Limpando cache e cookies do Google Chrome...
+:: -------------------------------
+:: Limpando arquivos temporarios do sistema
+:: -------------------------------
+echo [2/7] Limpando TEMP do sistema...
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+for /d %%d in ("C:\Windows\Temp\*") do rd /s /q "%%d" >nul 2>&1
+echo ✓ TEMP do sistema limpo.
 
-REM Caminhos do cache e cookies
-@@ -94,37 +79,27 @@ if exist "%chromeCookies%" (
-echo Cache e cookies do Chrome limpos (se existiam).
+:: -------------------------------
+:: Google Chrome - Cache, Cookies, Historico
+:: -------------------------------
+echo [3/7] Limpando dados do Google Chrome...
+
+set "chromeProfile=%LOCALAPPDATA%\Google\Chrome\User Data\Default"
+set "chromeUserData=%LOCALAPPDATA%\Google\Chrome\User Data"
+
+rd /s /q "%chromeProfile%\Cache" >nul 2>&1
+rd /s /q "%chromeProfile%\Code Cache" >nul 2>&1
+rd /s /q "%chromeProfile%\GPUCache" >nul 2>&1
+del /q /f "%chromeProfile%\History" >nul 2>&1
+del /q /f "%chromeProfile%\Cookies" >nul 2>&1
+del /q /f "%chromeProfile%\Web Data" >nul 2>&1
+del /q /f "%chromeProfile%\Favicons" >nul 2>&1
+echo ✓ Chrome limpo (cache, cookies e histórico).
+
+:: -------------------------------
+:: Microsoft Edge - Cache, Cookies, Historico
+:: -------------------------------
+echo [4/7] Limpando dados do Microsoft Edge...
+
+set "edgeProfile=%LOCALAPPDATA%\Microsoft\Edge\User Data\Default"
+
+rd /s /q "%edgeProfile%\Cache" >nul 2>&1
+rd /s /q "%edgeProfile%\Code Cache" >nul 2>&1
+rd /s /q "%edgeProfile%\GPUCache" >nul 2>&1
+del /q /f "%edgeProfile%\History" >nul 2>&1
+del /q /f "%edgeProfile%\Cookies" >nul 2>&1
+del /q /f "%edgeProfile%\Web Data" >nul 2>&1
+del /q /f "%edgeProfile%\Favicons" >nul 2>&1
+echo ✓ Edge limpo (cache, cookies e historico).
+
+:: -------------------------------
+:: Mozilla Firefox
+:: -------------------------------
+echo [5/7] Tentando limpar Firefox...
+
+for /d %%d in ("%APPDATA%\Mozilla\Firefox\Profiles\*") do (
+    del /q /f "%%d\cookies.sqlite" >nul 2>&1
+    del /q /f "%%d\places.sqlite" >nul 2>&1
+    rd /s /q "%%d\cache2" >nul 2>&1
+)
+echo  Firefox limpo (cookies, histórico e cache).
+
+:: -------------------------------
+:: Lixeira
+:: -------------------------------
+echo [6/7] Esvaziando Lixeira...
+powershell -command "Clear-RecycleBin -Force" >nul 2>&1
+echo ✓ Lixeira esvaziada.
+
+:: -------------------------------
+:: Prefetch
+:: -------------------------------
+echo [7/7] Limpando arquivos de prefetch...
+del /q /f /s C:\Windows\Prefetch\* >nul 2>&1
+echo Prefetch limpo.
+
 echo.
-
+echo ================================
+echo       LIMPEZA CONCLUÍDA
+echo ================================
 
 
 
