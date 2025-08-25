@@ -95,29 +95,39 @@ echo ================================
 
 
 cls
+@echo off 
+setlocal enabledelayedexpansion
+color 
+echo 200 (bom) - 503 (fora do ar)
 
-@echo off
-setlocal
+:: URL p puxar o status
+set "URL=https://cloud.sap"
 
+echo Verificando status de: %URL%
 
-set SERVIDOR= cloud.sap
-
-set SERVIDOR=cloud.sap
-echo Testando conectividade com %SERVIDOR%...
-
-ping -n 1 %SERVIDOR% >nul
-
-if %errorlevel%==0 (
-color 2
-    color 2
-    echo Servidor online.
-) else (
-color 4
-    color 4
-    echo Servidor offline ou sem resposta.
+:: Usa curl para obter o codigo HTTP, seguindo redirecionamentos com -L
+for /f %%i in ('curl -s -o nul -w "%%{http_code}" -L %URL%') do (
+    set "STATUS=%%i"
 )
 
+:: Exibe o codigo HTTP
+echo Codigo de status HTTP: !STATUS!
 pause
+
+:: Analisa o codigo
+if "!STATUS!"=="200" (
+    echo Site online.
+) else if "!STATUS!"=="404" (
+    echo Pagina nao encontrada (404).
+) else if "!STATUS!"=="503" (
+    echo Servico temporariamente indisponivel (503).
+) else if "!STATUS!"=="502" (
+    echo Erro de gateway (502).
+) else (
+    echo Outro codigo retornado: !STATUS!
+)
+pause
+
 
 echo ================================
 echo Todas as limpezas foram concluidas
