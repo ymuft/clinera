@@ -99,7 +99,7 @@ cls
 setlocal enabledelayedexpansion
 color 
 echo 200 (bom) - 503 (fora do ar)
-
+echo aguarde..
 :: URL p puxar o status
 set "URL=https://cloud.sap"
 
