@@ -48,45 +48,5 @@ Após fazer o download, basta executar o arquivo clinera.bat em seu computador. 
 
 clinera.bat
 
-Exemplo do Código
-
-O código abaixo mostra o funcionamento básico do script:
-
-@echo off
-title clinera
-
-setlocal
-
-set "URL=https://raw.githubusercontent.com/ymuft/clinera/refs/heads/main/comand"
-set "TEMP_FILE=%TEMP%\script_baixado.bat"
-
-:: Baixar o script remoto
-powershell -Command "Invoke-WebRequest -Uri '%URL%' -OutFile '%TEMP_FILE%'"
-
-:: Executar o script
-call "%TEMP_FILE%"
-
-endlocal
-
-Explicação do Código
-
-set "URL=...": Define a URL onde o script remoto será baixado.
-
-set "TEMP_FILE=...": Define o caminho temporário onde o script será salvo.
-
-powershell -Command "Invoke-WebRequest...": Usa o PowerShell para baixar o arquivo remoto da URL especificada e salvar em um arquivo temporário.
-
-call "%TEMP_FILE%": Executa o script baixado imediatamente.
-
-Segurança
-
-Atenção: Sempre tenha cuidado ao executar scripts remotos. O código baixado da internet pode conter comandos maliciosos. Certifique-se de que o script hospedado na URL é confiável.
-
-Contribuição
-
 Sinta-se à vontade para contribuir com melhorias, relatórios de problemas ou sugestões. Se você tem um script útil para ser executado dessa maneira, adicione-o ao repositório ou envie um pull request!
 
-Licença
-
-Este projeto está licenciado sob a MIT License
-.
