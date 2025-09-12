@@ -26,7 +26,7 @@ echo.
 echo [2/7] Limpando TEMP do sistema...
 del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 for /d %%d in ("C:\Windows\Temp\*") do rd /s /q "%%d" >nul 2>&1
-echo ✓ TEMP do sistema limpo.
+echo  TEMP do sistema limpo.
 
 :: -------------------------------
 :: Google Chrome - Cache, Cookies, Historico
@@ -43,7 +43,7 @@ del /q /f "%chromeProfile%\History" >nul 2>&1
 del /q /f "%chromeProfile%\Cookies" >nul 2>&1
 del /q /f "%chromeProfile%\Web Data" >nul 2>&1
 del /q /f "%chromeProfile%\Favicons" >nul 2>&1
-echo ✓ Chrome limpo (cache, cookies e histórico).
+echo  Chrome limpo (cache, cookies e histórico).
 
 :: -------------------------------
 :: Microsoft Edge - Cache, Cookies, Historico
@@ -59,7 +59,7 @@ del /q /f "%edgeProfile%\History" >nul 2>&1
 del /q /f "%edgeProfile%\Cookies" >nul 2>&1
 del /q /f "%edgeProfile%\Web Data" >nul 2>&1
 del /q /f "%edgeProfile%\Favicons" >nul 2>&1
-echo ✓ Edge limpo (cache, cookies e historico).
+echo  Edge limpo (cache, cookies e historico).
 
 :: -------------------------------
 :: Mozilla Firefox
@@ -78,7 +78,7 @@ echo  Firefox limpo (cookies, histórico e cache).
 :: -------------------------------
 echo [6/7] Esvaziando Lixeira...
 powershell -command "Clear-RecycleBin -Force" >nul 2>&1
-echo ✓ Lixeira esvaziada.
+echo  Lixeira esvaziada.
 
 :: -------------------------------
 :: Prefetch
